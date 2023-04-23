@@ -105,12 +105,18 @@ def culclationAvg(items):
         for time, conf in zip(times[:numb], confs[:numb]):
             ave = ave + time
             aveconf = aveconf + conf
-        minutes = int(ave.total_seconds()//numb)//60
+        allmint = int(ave.total_seconds())
+        if numb > 1:
+            allmint = allmint//numb
+        minutes = allmint//60
         hours = minutes//60
         minutes = minutes - hours*60
         ret[str(numb) + 'Time'] = datetime.time(hour=hours,
                                                 minute=minutes, second=0).strftime("%H:%M")
-        ret[str(numb) + 'Conf'] = aveconf//numb
+        if numb < 2:
+            ret[str(numb) + 'Conf'] = aveconf
+        else:
+            ret[str(numb) + 'Conf'] = aveconf//numb
 
     average(5)
     average(10)
@@ -130,7 +136,7 @@ def fetch(address):
 
 def dailyIncom(address):
     file = fetch(address)
-    for i in range(5):
+    for i in range(2):
         if file:
             break
         file = fetch(address)
