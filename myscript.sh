@@ -1,1 +1,0 @@
-curl https://main1.phpcoin.net/apps/explorer/address.php?address=Pst5VEoCwbeowUoEPLc4iQQvgVKJqSJi3N | grep "<table.*</table>"

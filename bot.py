@@ -2,7 +2,7 @@ import calculation
 import os
 import telebot
 
-BOT_TOKEN = os.environ.get('BOT_TOKEN')
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
 
 bot = telebot.TeleBot(BOT_TOKEN)
 
@@ -10,6 +10,7 @@ bot = telebot.TeleBot(BOT_TOKEN)
 def handle(addresses=None):
     data = calculation.calculation(addresses)
     string = ""
+    total_income = 0
     for key in data.keys():
         if not addresses:
             string = string + key + "\n"
@@ -21,7 +22,10 @@ def handle(addresses=None):
         for k in data[key]:
             string = string + "  " + \
                 str(k) + " : " + str(data[key][k]) + "\n"
+            if k == "Reward Stake" or k == "Reward Masternode":
+                total_income = total_income + int(data[key][k])
         string = string + "\n"
+    string = string + "  total incom:  " + str(total_income) + "\n"
     return string
 
 
