@@ -64,12 +64,10 @@ def pares(file):
 
 
 def culclation(items):
-    now = datetime.datetime.now()
-    end = now
-    # end = now - datetime.timedelta(hours=8)
+    end = datetime.datetime.now()
+    now = end + datetime.timedelta(hours=8)
     start = now - datetime.timedelta(hours=now.hour, minutes=now.minute, seconds=now.second,
-                                     microseconds=now.microsecond)
-    start = start - datetime.timedelta(hours=8)
+                                     microseconds=now.microsecond) - datetime.timedelta(hours=8)
     income = {}
     for item in items:
         time = datetime.datetime.strptime(item['Date'], '%Y-%m-%d %H:%M:%S')
